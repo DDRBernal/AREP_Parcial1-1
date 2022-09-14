@@ -5,13 +5,15 @@
 
 package edu.eci.arem.punto1;
 
+import java.io.IOException;
+
 /**
  *
  * @author arep02
  */
 public class Mavenproject1 {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    public static void main(String[] args) throws IOException {
+        HttpServer.run();
     }
 }
