@@ -7,6 +7,7 @@ public class QuickSort {
     private static ArrayList<Integer> arrayList;
     private static int inicio;
 
+
     public QuickSort(ArrayList<Integer> array){
         arrayList = new ArrayList<>();
         arrayList = array;
@@ -19,20 +20,24 @@ public class QuickSort {
         //int pivote =  arrayList.get(fin);
         int index= 0;
         if (inicio< fin){
-            Integer[] p = partition(newArray,inicio,fin);
+            Integer[] p = partition(array,inicio,fin);
+            for (Integer i : p){
+                if (i!=null) {
+                    System.out.println("asadas: " + i);
+                }
+            }
             ArrayList<Integer> arrayTemp = new ArrayList<>();
             for (Integer i : arrayTemp){
                 arrayTemp.add(i);
             }
-            sort(arrayTemp, inicio, fin - 1);
-            sort(arrayTemp, inicio + 1, fin);
+            ArrayList<Integer> firtArray = sort(arrayTemp, inicio, fin - 1);
+            ArrayList<Integer> secondArray = sort(arrayTemp, inicio + 1, fin);
         }
         return newArray;
     }
 
     public static Integer[] partition(ArrayList<Integer> A, int inicio, int fin){
         Integer[] arrayN = new Integer[fin];
-        //fill the array
         for (int i = 0; i<A.size(); i++){
             arrayN[i] = A.get(i);
         }
@@ -45,6 +50,7 @@ public class QuickSort {
                 arrayN[j] = value3;
             }
         }
+
         return arrayN;
     }
 
