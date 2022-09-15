@@ -37,7 +37,6 @@ public class HttpConnection {
                 response.append(inputLine);
             }
             in.close();
-
             System.out.println(response.toString());
         } else {
             System.out.println("GET request not worked");

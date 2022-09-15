@@ -44,14 +44,13 @@ public class HttpServer {
             while ((inputLine = in.readLine()) != null) {
                 if (inputLine.contains("GET")) {
                     message = inputLine.split(" ")[1];
-
                 }
                 System.out.println("Recibí: " + inputLine);
                 if (!in.ready()) {
                     break;
                 }
             }
-            
+
             //example: if url is localhost/35000/"cos"||"sin"||"tan"?val=number
             //example  if url is localhost:35000/qck/{5,2,8,1}"
             String result = "";
@@ -72,13 +71,29 @@ public class HttpServer {
                 for (Integer i : arrayTemp){
                     result += i.toString()+",";
                 } result+="}";
-
             }
-            System.out.println("zzzzzzzzzzzzzzzzzzzzzzz "+result);
+
+
             outputLine = "HTTP/1.1 200 OK\r\n"
                     + "Content-Type: text/JSON\r\n"
                     + "\r\n"
                     + "JSON: \n" + result;
+
+
+            outputLine = "HTTP/1.1 200 OK\r\n"
+                    + "Content-Type: text/html\r\n"
+                    + "\r\n"
+                    + "<!DOCTYPE html>\n"
+                    + "<html>\n"
+                    + "<head>\n"
+                    + "<meta charset=\"UTF-8\">\n"
+                    + "<title>Title of the document</title>\n"
+                    + "</head>\n"
+                    + "<body>\n"
+                    + "<h1>Mi propio mensaje</h1>\n" +ReadFile.readfile()
+                    + "</body>\n"
+                    + "</html>\n";
+
 
             out.println(outputLine);
             out.close();

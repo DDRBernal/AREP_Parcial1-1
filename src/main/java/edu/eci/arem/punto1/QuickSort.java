@@ -23,9 +23,9 @@ public class QuickSort {
             Integer[] p = partition(array,inicio,fin);
             for (Integer i : p){
                 if (i!=null) {
-                    System.out.println("asadas: " + i);
+
                 }
-            }
+            }System.out.println();
             ArrayList<Integer> arrayTemp = new ArrayList<>();
             for (Integer i : arrayTemp){
                 arrayTemp.add(i);

@@ -16,22 +16,16 @@ import java.nio.file.Paths;
 public class ReadFile {
     
     public static String readfile() throws IOException{
+        Path file = Paths.get("src\\main\\Resources\\public\\index.html");
         String doc = "";
-        Path path =  Paths.get("src\\java\\resources\\public\\index.html");
-        path.toFile();
-//        try(
-//
-//                InputStream in = new InputStreamReader();
-//                BufferedReader buf = new BufferedReader(new InputStreamReader(in.getInputStream()));
-//                String inputLine = "";
-//        while ((inputLine = buf.readLine()) != null) {
-//            System.out.println("Recibí: " + inputLine);
-//            doc+=inputLine;
-//        } catch (IOException ex){
-//
-//        }
+        try(InputStream in = Files.newInputStream(file);
+            BufferedReader buf = new BufferedReader(new InputStreamReader(in))){
+            String line = "";
+            while((line = buf.readLine())!= null){
+                doc+=line;
+            }
+        } catch (IOException ex){
+        }
         return doc;
     }
-    
-    
 }
