@@ -1,1 +1,1 @@
-web java -cp target/classes/* edu.eci.arem.punto1
+java -cp target/classes edu.eci.arem.punto1
