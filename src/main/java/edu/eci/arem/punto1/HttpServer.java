@@ -56,21 +56,38 @@ public class HttpServer {
             String result = "";
             if (message.contains("cos") || message.contains("sin") || message.contains("tan")){
                 String operator = message.split("/")[1];
-                value = Integer.parseInt(message.split("val=")[1]);
+                try {
+                    value = Integer.parseInt(message.split("val=")[1]);
+                } catch (NumberFormatException ex){
+                    operator = "-404_error";
+                }
                 trigCalculator.setValues(operator,value);
                 System.out.println(trigCalculator.getValor());
-                result = TrigCalculator.convertoToJSON(String.valueOf(trigCalculator.calculoRadianes()));
+                if (operator!="-404_error") result = TrigCalculator.convertoToJSON(String.valueOf(trigCalculator.calculoRadianes()));
+                else {result="Incorrect operator or invalid number";}
+
             }
             //Quicksort
             else if (message.contains("qck")){
                 String operator = message.split("/")[1];
                 String values = message.split("val=")[1];
-                trigCalculator.setValues(operator,values);
-                ArrayList<Integer> arrayTemp = trigCalculator.quicksort();
-                result = "{";
-                for (Integer i : arrayTemp){
-                    result += i.toString()+",";
-                } result+="}";
+                try {
+                    trigCalculator.setValues(operator,values);
+                } catch (NumberFormatException ex ){
+                    values = "-404_error";
+                }
+                if (values!="-404_error") {
+                    ArrayList<Integer> arrayTemp = trigCalculator.quicksort();
+                    result = "{";
+                    for (Integer i : arrayTemp) {
+                        result += i.toString() + ",";
+                    }
+                    result += "}";
+                } else{
+                    result="Incorrect operator or invalid number";
+                }
+            } else{
+                result = "Not a valid operator";
             }
 
 
@@ -80,19 +97,19 @@ public class HttpServer {
                     + "JSON: \n" + result;
 
 
-            outputLine = "HTTP/1.1 200 OK\r\n"
-                    + "Content-Type: text/html\r\n"
-                    + "\r\n"
-                    + "<!DOCTYPE html>\n"
-                    + "<html>\n"
-                    + "<head>\n"
-                    + "<meta charset=\"UTF-8\">\n"
-                    + "<title>Title of the document</title>\n"
-                    + "</head>\n"
-                    + "<body>\n"
-                    + "<h1>Mi propio mensaje</h1>\n" +ReadFile.readfile()
-                    + "</body>\n"
-                    + "</html>\n";
+//            outputLine = "HTTP/1.1 200 OK\r\n"
+//                    + "Content-Type: text/html\r\n"
+//                    + "\r\n"
+//                    + "<!DOCTYPE html>\n"
+//                    + "<html>\n"
+//                    + "<head>\n"
+//                    + "<meta charset=\"UTF-8\">\n"
+//                    + "<title>Title of the document</title>\n"
+//                    + "</head>\n"
+//                    + "<body>\n"
+//                    + "<h1>Mi propio mensaje</h1>\n" +ReadFile.readfile()
+//                    + "</body>\n"
+//                    + "</html>\n";
 
 
             out.println(outputLine);
